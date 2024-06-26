@@ -11,7 +11,13 @@ function App() {
   };
 
   const distributeCards = () => {
-    fetch(`http://localhost/index.php?people=${inputValue}`)
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ5b3VyZG9tYWluLmNvbSIsImlhdCI6MTcxOTM2ODA4OSwiZXhwIjoxNzE5MzcxNjg5LCJzdWIiOiJ5b3VyX3VzZXJuYW1lIn0.7Hn9LxqsAdROTc9hdtut5wf5Q6mjr4pYHuBwH_LmcGc'; // your jwt token
+    fetch(`http://localhost/index.php?people=${inputValue}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
       .then((response) => response.json())
       .then((data) => {
         if (data.error) {
